@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center align-items-center ">
+  <div class="w-50">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Entrez un nombre :</label>
+      <input 
+        type="number" 
+        id="nombre"
+        class="form-control form-control-md" 
+        min="0"
+        max="9999999999999"
+        placeholder="0"
+        [(ngModel)]="nombre"
+        (input)="checkValue()"
+        #p="ngModel"
+      >
+    </div>
+            <div
+          *ngIf="p.dirty && (p.value === null || p.value <= 0 || p.value > 100000000000)"
+          class="alert alert-danger alert-sm d-flex align-items-center justify-content-between py-1 px-2 mb-1"
+        >
+          <small>
+            Veuillez entrer un nombre valide entre 0 et 100.000.000.000
+          </small>
+
+          <button
+            type="button"
+            class="btn-close btn-close-sm ms-2"
+            aria-label="Close"
+            (click)="p.reset()"
+          ></button>
+        </div>
+
+
+    <button
+      type="button"
+      [ngClass]="'btn '+'btn-'+color_button + ' btn-md w-100'" 
+      [disabled]="disabled_button"
+      (click)="sendValue(); p.reset()"
+    >
+      {{ value_button }}
+    </button>
+  </div>
+</div>

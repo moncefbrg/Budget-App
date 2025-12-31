@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">BudgetManager</a>
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div [ngClass]="{'collapse navbar-collapse': true, 'show': !isCollapsed}">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Tableau de bord</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/depenses" routerLinkActive="active">Dépenses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/benefices" routerLinkActive="active">Revenus</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/settings" routerLinkActive="active">Paramètres</a>
+        </li>
+      </ul>
+
+  
+
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
+          <button class="btn btn-success" (click)="login()">Login</button>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn$ | async">
+          <button class="btn btn-danger" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

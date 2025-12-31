@@ -1,0 +1,10 @@
+<div class="d-flex justify-content-center">
+    <h1>Page des bénéfices</h1>
+</div>
+<app-input-submit
+[value_button]="'Ajouter un bénéfice'"
+[color_button]="'success'"
+[disabled_button]="true"
+(submit)="onAddBenefice($event)"
+></app-input-submit>
+<app-tableau [data]="(data$ | async) || []"></app-tableau>

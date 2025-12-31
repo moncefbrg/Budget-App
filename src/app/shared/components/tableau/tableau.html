@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-center align-items-center ">
+    <div class="w-50">
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Montant</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let row of paginatedData">
+
+    <!-- ID (lecture seule) -->
+    <td>{{ row.id }}</td>
+
+    <!-- MONTANT -->
+    <td>
+      <span *ngIf="editingRowId !== row.id">
+        {{ row.montant }}
+      </span>
+
+      <input *ngIf="editingRowId === row.id"
+             type="number"
+             class="form-control form-control-sm"
+             [(ngModel)]="editedRow.montant">
+    </td>
+
+    <!-- DATE -->
+    <td>
+      <span *ngIf="editingRowId !== row.id">
+        {{ row.date | date:'dd/MM/yyyy' }}
+      </span>
+
+      <input *ngIf="editingRowId === row.id"
+             type="date"
+             class="form-control form-control-sm"
+             [(ngModel)]="editedRow.date">
+    </td>
+
+    <!-- ACTIONS -->
+    <td>
+      <button *ngIf="editingRowId !== row.id"
+              class="btn btn-sm btn-warning me-2"
+              (click)="toggleEdit(row)">
+        Modifier
+      </button>
+
+      <button *ngIf="editingRowId === row.id"
+              class="btn btn-sm btn-success me-2"
+              (click)="saveEdit(row)">
+        Enregistrer
+      </button>
+
+      <button *ngIf="editingRowId === row.id"
+              class="btn btn-sm btn-secondary me-2"
+              (click)="cancelEdit()">
+        Annuler
+      </button>
+
+      <button class="btn btn-sm btn-danger"
+              (click)="onDelete(row.id || -1)">
+        Supprimer
+      </button>
+    </td>
+
+  </tr>
+</tbody>
+
+</table>
+
+<div class="d-flex justify-content-between align-items-center mt-2">
+  <button class="btn btn-secondary"
+          (click)="prevPage()"
+          [disabled]="currentPage === 1">
+    Précédent
+  </button>
+
+  <span>Page {{ currentPage }} / {{ totalPages }}</span>
+
+  <button class="btn btn-secondary"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages">
+    Suivant
+  </button>
+</div>
+
+    </div>
+</div>

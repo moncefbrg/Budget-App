@@ -1,0 +1,15 @@
+.carousel-inner {
+  height: 200px; /* hauteur fixe du carousel */
+}
+
+.carousel-item {
+  text-align: center;        /* centre horizontal */
+}
+
+.carousel-item img {
+  max-height: 100%;          /* ne dépasse pas la hauteur du carousel */
+  max-width: 100%;           /* ne dépasse pas la largeur du carousel */
+  object-fit: cover;         /* remplit le cadre sans déformer */
+  margin: 0 auto;            /* centre horizontal */
+  display: block;            /* nécessaire pour margin auto */
+}
