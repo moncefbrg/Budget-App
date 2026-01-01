@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Transaction } from '../../../core/services/transaction';
+import { Operation, Transaction } from '../../../core/services/transaction';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-depenses-page',
@@ -8,13 +9,20 @@ import { Transaction } from '../../../core/services/transaction';
   styleUrl: './depenses-page.css',
 })
 export class DepensesPage implements OnInit{
-  data:any;
+  data$:Observable<Operation[]> | undefined;
   constructor(private dataService:Transaction){}
   
   ngOnInit(): void {
-    this.data = this.dataService.getDepenses();
+    this.data$ = this.dataService.getDepenses();
   }
   onAddDepense(montant: number) {
-    console.log('Nouvelle dépense ajoutée :', montant);
+    const operation : Operation = {
+      montant:montant,
+      date:new Date()
+    }
+    this.dataService.addDepenses(operation);
+  }
+  onDeleteDepense(id:number) {
+    this.dataService.removeDepenses(id);
   }
 }

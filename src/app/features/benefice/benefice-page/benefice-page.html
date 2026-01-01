@@ -7,4 +7,4 @@
 [disabled_button]="true"
 (submit)="onAddBenefice($event)"
 ></app-input-submit>
-<app-tableau [data]="(data$ | async) || []"></app-tableau>
+<app-tableau [data]="(data$ | async) || []" (delete)="onDeleteBenefice($event)"></app-tableau>

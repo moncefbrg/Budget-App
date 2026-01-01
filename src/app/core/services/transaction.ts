@@ -61,6 +61,15 @@ export class Transaction {
     };
     this.depensesSubject.next([...currentDepenses, newOperation]); // Mise à jour du flux des dépenses
   }
+   // Méthode pour supprimer une dépense
+  removeDepenses(id:number): void {
+    const currentDepenses = this.depensesSubject.value.filter(op => op.id !== id);
+    this.depensesSubject.next([...currentDepenses]); // Mise à jour du flux des dépenses
+  }
+  removeBenefices(id:number):void{
+    const currentBenefices = this.beneficesSubject.value.filter(op => op.id !== id);
+    this.beneficesSubject.next([...currentBenefices]);
+  }
 
   // Méthode pour générer un nouvel ID
   private getNextId(list: Operation[]): number {

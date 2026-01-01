@@ -6,4 +6,4 @@
   [color_button]="'primary'"
   [disabled_button]="true"
   (submit)="onAddDepense($event)"></app-input-submit>
-  <app-tableau [data]="data"></app-tableau>
+  <app-tableau [data]="(data$ | async) || []" (delete)="onDeleteDepense($event)"></app-tableau>

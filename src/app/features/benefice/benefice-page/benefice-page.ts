@@ -27,4 +27,7 @@ export class BeneficePage implements OnInit {
 
     this.dataService.addBenefices(operation); // Ajoute un bénéfice
   }
+  onDeleteBenefice(id:number) {
+    this.dataService.removeBenefices(id);
+  }
 }
