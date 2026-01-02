@@ -8,27 +8,32 @@
     <div [ngClass]="{'collapse navbar-collapse': true, 'show': !isCollapsed}">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Tableau de bord</a>
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" *ngIf="user">Tableau de bord</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/depenses" routerLinkActive="active">Dépenses</a>
+          <a class="nav-link" routerLink="/depenses" routerLinkActive="active" *ngIf="user">Dépenses</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/benefices" routerLinkActive="active">Revenus</a>
+          <a class="nav-link" routerLink="/benefices" routerLinkActive="active" *ngIf="user">Revenus</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/settings" routerLinkActive="active">Paramètres</a>
+          <a class="nav-link" routerLink="/settings" routerLinkActive="active" *ngIf="user">Paramètres</a>
         </li>
       </ul>
 
   
 
       <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
-          <button class="btn btn-success" (click)="login()">Login</button>
+         <li class="nav-item" *ngIf="user">
+          <span class="nav-link text-muted me-4">
+            Bonjour {{ user.prenom }}
+          </span>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn$ | async">
-          <button class="btn btn-danger" (click)="logout()">Logout</button>
+        <li class="nav-item" *ngIf="!user">
+          <button class="btn btn-success" (click)="onLogin()">Login</button>
+        </li>
+        <li class="nav-item" *ngIf="user">
+          <button class="btn btn-danger" (click)="onLogout()">Logout</button>
         </li>
       </ul>
     </div>

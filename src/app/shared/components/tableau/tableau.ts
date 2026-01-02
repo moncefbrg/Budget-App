@@ -15,6 +15,7 @@ export class Tableau implements OnChanges {
 
   @Input() data: Operation[] = [];
   @Output() delete = new EventEmitter<number>; 
+  @Output() modify = new EventEmitter<Operation>;
 
   /* ================= PAGINATION ================= */
 
@@ -77,6 +78,7 @@ export class Tableau implements OnChanges {
       row.date = this.editedRow.date;
     }
     this.cancelEdit();
+    this.modify.emit(row);
   }
 
   cancelEdit(): void {

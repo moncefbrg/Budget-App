@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center align-items-center py-4">
+  <div class="w-50">
+    <div class="card border-0 shadow-lg">
+      <div class="card-body pt-4">
+
+        <!-- Avatar -->
+        <div class="text-center mb-4">
+          <div class="rounded-circle bg-primary bg-opacity-10 text-primary 
+                      d-flex align-items-center justify-content-center mx-auto"
+               style="width: 100px; height: 100px; font-size: 2rem;">
+            <span class="fw-bold">{{avatar}}</span>
+          </div>
+        </div>
+
+        <!-- Informations : 2 champs par ligne -->
+        <form>
+          <div class="row g-3 mb-3">
+            <div class="col">
+              <label class="form-label fw-semibold">Nom</label>
+              <input type="text" class="form-control form-control-sm" 
+              name="nom"
+              [disabled]="!modifyBoolean"
+              [(ngModel)]="tempUser.nom"
+              >
+            </div>
+            <div class="col">
+              <label class="form-label fw-semibold">Prénom</label>
+              <input type="text" class="form-control form-control-sm" 
+              name="prenom"
+              [disabled]="!modifyBoolean"
+              [(ngModel)]="tempUser.prenom"
+              >
+            </div>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col">
+              <label class="form-label fw-semibold">Email</label>
+              <input type="email" class="form-control form-control-sm"
+              name="email"
+                     [disabled]="!modifyBoolean"
+                     [(ngModel)]="tempUser.email"
+                     >
+            </div>
+            <div class="col">
+              <label class="form-label fw-semibold">Date de création</label>
+              <input type="date" class="form-control form-control-sm"
+                    [value]="tempUser.dateCreation | date:'yyyy-MM-dd'"
+                     disabled>
+            </div>
+          </div>
+        </form>
+        <div class="text-center">
+            <p *ngIf="tempUser.desactive" class="text-muted">Votre compte est désactivé</p>
+            <p *ngIf="!tempUser.desactive"class="text-muted">Votre compte est activé</p>
+        </div>
+
+
+        <!-- Boutons -->
+        <div class="d-flex justify-content-center gap-3 pt-3 border-top">
+            <button *ngIf="!modifyBoolean" class="btn btn-primary px-4" (click)="toggleModify()">Modifier</button>
+            <button *ngIf="!modifyBoolean && !tempUser.desactive" class="btn btn-outline-danger px-4" (click)="toggleActivateUser(tempUser.id)">Désactiver</button>
+            <button *ngIf="!modifyBoolean && tempUser.desactive" class="btn btn-outline-warning px-4" (click)="toggleActivateUser(tempUser.id)">Activer</button>
+            <button *ngIf="modifyBoolean" class="btn btn-success px-4" (click)="modifyUser(tempUser)">Enregistrer</button>
+            <button *ngIf="modifyBoolean" class="btn btn-outline-dark px-4" (click)="cancel()">Annuler</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

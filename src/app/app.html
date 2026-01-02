@@ -1,4 +1,8 @@
 
-<app-navbar></app-navbar>
+<app-navbar
+[user]="user"
+(login)="login()"
+(logout)="logout()"
+></app-navbar>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

@@ -25,4 +25,7 @@ export class DepensesPage implements OnInit{
   onDeleteDepense(id:number) {
     this.dataService.removeDepenses(id);
   }
+  onModifyDepense(o:Operation){
+    this.dataService.editDepense(o);
+  }
 }

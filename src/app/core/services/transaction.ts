@@ -71,6 +71,20 @@ export class Transaction {
     this.beneficesSubject.next([...currentBenefices]);
   }
 
+  editBenifice(op:Operation){
+    const currentBenefices = this.beneficesSubject.value;
+    const beneficesPop = currentBenefices.filter(o => o.id !== op.id);
+    this.beneficesSubject.next([...beneficesPop,op]);
+  }
+
+  
+  editDepense(op:Operation){
+    const currentDepences = this.depensesSubject.value;
+    const depensesPop = currentDepences.filter(o => o.id !== op.id);
+    this.depensesSubject.next([...depensesPop,op]);
+    console.log(this.depensesSubject.value);
+  }
+
   // Méthode pour générer un nouvel ID
   private getNextId(list: Operation[]): number {
     return list.length > 0

@@ -30,4 +30,7 @@ export class BeneficePage implements OnInit {
   onDeleteBenefice(id:number) {
     this.dataService.removeBenefices(id);
   }
+   onModifyBenefice(o:Operation){
+    this.dataService.editBenifice(o);
+  }
 }
