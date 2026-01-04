@@ -12,7 +12,7 @@ Budget Tracker est une application web de suivi de budget personnel. Elle permet
 
 **Technologies utilisées :**  
 - Frontend : Angular, Chart.js  
-- Backend : Spring Boot, Spring Security, JPA / Hibernate  
+- Backend : Spring Boot, Spring Security, JPA / Hibernate (futur) 
 - Base de données : MySQL   
 - JWT pour l’authentification et sécurité  
 
