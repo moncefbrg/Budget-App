@@ -8,16 +8,23 @@ import { IObjectif, Objectif } from '../../../core/services/objectif';
   styleUrls: ['./preferences.css'],
 })
 export class Preferences implements OnInit {
-  // L'objectif peut être null si non défini
   objectif: IObjectif | null = null;
-  
 
-  // Objet temporaire pour l'édition (toujours un IObjectif complet)
-  tempObj: IObjectif = {
+  // tempObj pour l'édition : dDebut et dFin sont des strings "yyyy-MM-dd"
+  tempObj: {
+    id: number | null;
+    userId: number | null;
+    dDebut: string;
+    dFin: string;
+    annuel: number;
+    benefice: number;
+    depense: number;
+    note: string;
+  } = {
     id: null,
     userId: null,
-    dDebut: null as unknown as Date, // si dates vides
-    dFin: null as unknown as Date,
+    dDebut: '',
+    dFin: '',
     annuel: 0,
     benefice: 0,
     depense: 0,
@@ -32,33 +39,68 @@ export class Preferences implements OnInit {
     this.objectifService.getObjectif().subscribe(o => {
       if (o) {
         this.objectif = o;
-        // On copie l'objectif complet dans tempObj
-        this.tempObj = { ...o };
+        this.tempObj = {
+          id: o.id,
+          userId: o.userId,
+          dDebut: o.dDebut.toISOString().substring(0, 10), // "yyyy-MM-dd"
+          dFin: o.dFin.toISOString().substring(0, 10),
+          annuel: o.annuel ?? 0,
+          benefice: o.benefice ?? 0,
+          depense: o.depense ?? 0,
+          note: o.note ?? ''
+        };
       }
     });
   }
 
-  // Lancer l'édition
   toggleModify() {
     if (this.objectif) {
-      this.tempObj = { ...this.objectif }; // copie complète
+      this.tempObj = {
+        id: this.objectif.id,
+        userId: this.objectif.userId,
+        dDebut: this.objectif.dDebut.toISOString().substring(0, 10),
+        dFin: this.objectif.dFin.toISOString().substring(0, 10),
+        annuel: this.objectif.annuel ?? 0,
+        benefice: this.objectif.benefice ?? 0,
+        depense: this.objectif.depense ?? 0,
+        note: this.objectif.note ?? ''
+      };
       this.modifyBoolean = true;
     }
   }
 
-  // Annuler les modifications
   cancel() {
     this.modifyBoolean = false;
     if (this.objectif) {
-      this.tempObj = { ...this.objectif }; // reset
+      this.tempObj = {
+        id: this.objectif.id,
+        userId: this.objectif.userId,
+        dDebut: this.objectif.dDebut.toISOString().substring(0, 10),
+        dFin: this.objectif.dFin.toISOString().substring(0, 10),
+        annuel: this.objectif.annuel ?? 0,
+        benefice: this.objectif.benefice ?? 0,
+        depense: this.objectif.depense ?? 0,
+        note: this.objectif.note ?? ''
+      };
     }
   }
 
-  // Sauvegarder les modifications
-  modifyObjectif(o: IObjectif) {
+  modifyObjectif() {
     if (!this.objectif) return;
 
-    this.objectifService.modifyObjectif(o);
+    // Reconvertir string → Date avant d'envoyer au service
+    const objToSave: IObjectif = {
+      id: this.tempObj.id,
+      userId: this.tempObj.userId,
+      dDebut: new Date(this.tempObj.dDebut),
+      dFin: new Date(this.tempObj.dFin),
+      annuel: this.tempObj.annuel,
+      benefice: this.tempObj.benefice,
+      depense: this.tempObj.depense,
+      note: this.tempObj.note
+    };
+
+    this.objectifService.modifyObjectif(objToSave);
     this.modifyBoolean = false;
   }
 }

@@ -9,7 +9,7 @@ import { User } from '../../../core/services/auth';
 })
 export class Profil implements OnChanges,OnInit{
   @Input() user:User | null = null;
-  tempUser : User = {id:0,nom:'',prenom:'',email:'',dateCreation:new Date(NaN)};
+  tempUser : User = {id:0,nom:'',prenom:'',email:'',dateCreation: null as unknown as Date};
   avatar :string | null = null;
   modifyBoolean : boolean = false;
   @Output() modify = new EventEmitter<User>();

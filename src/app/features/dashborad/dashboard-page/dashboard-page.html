@@ -1,0 +1,70 @@
+<div class="container py-4">
+  <!-- Switch Bénéfices / Dépenses (juste visuel) -->
+  <div class="d-flex justify-content-center align-items-center mb-4">
+  <div class="d-flex align-items-center bg-light rounded-3 p-2 shadow-sm">
+    <span class="px-3 py-1 rounded-2 bg-white shadow-sm me-3 fw-semibold text-success switch-label switch-benefices">
+      Bénéfices
+    </span>
+    
+    <div class="form-check form-switch mx-2">
+      <input class="form-check-input" type="checkbox" id="toggleNature" (click)="toggleBenefice()" >
+    </div>
+    
+    <span class="px-3 py-1 rounded-2 bg-white shadow-sm ms-3 fw-semibold text-danger switch-label switch-depenses">
+      Dépenses
+    </span>
+  </div>
+</div>
+
+  <div class="row g-4 align-items-center" style="min-height: 400px;">
+    
+    <!-- Graphique en ligne -->
+    <div class="col-12 col-md-5 d-flex justify-content-center" *ngIf="showBenefice">
+      <app-line-chart
+        [data]="chartDataBenefice"
+        [year]="2026"
+        [nature]="'Bénéfices'"
+        [color]="'vert'"
+      ></app-line-chart>
+    </div>
+    <div class="col-12 col-md-5 d-flex justify-content-center" *ngIf="!showBenefice">
+      <app-line-chart
+        [data]="chartDataDepense"
+        [year]="2026"
+        [nature]="'Dépenses'"
+        [color]="'rouge'"
+      ></app-line-chart>
+    </div>
+
+    <!-- Progress pie -->
+    <div class="col-12 col-md-3 d-flex justify-content-center" *ngIf="showBenefice">
+      <app-pie-progress 
+        [percentage]="pourcentageBenefice"
+        [color]="'vert'"
+      ></app-pie-progress>
+    </div>
+    <div class="col-12 col-md-3 d-flex justify-content-center" *ngIf="!showBenefice">
+      <app-pie-progress 
+        [percentage]="pourcentageDepense"
+        [color]="'rouge'"
+      ></app-pie-progress>
+    </div>
+
+    <!-- Carte des objectifs -->
+    <div class="col-12 col-md-4 d-flex justify-content-center" *ngIf="showBenefice">
+      <app-objectif-details
+      [gagne]="totalBenefice"
+      [objectif]="objectifBenefice"
+      [type]="'Bénéfice'"
+      ></app-objectif-details>
+    </div>
+    <div class="col-12 col-md-4 d-flex justify-content-center" *ngIf="!showBenefice">
+      <app-objectif-details
+      [gagne]="totalDepenses"
+      [objectif]="objectifDepense"
+      [type]="'Dépense'"
+      ></app-objectif-details>
+    </div>
+
+  </div>
+</div>

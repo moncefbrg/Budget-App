@@ -1,0 +1,24 @@
+.pie-container {
+  position: relative;
+  width: 100%;
+  max-width: 150px; /* taille max du donut */
+  aspect-ratio: 1;  /* toujours carré */
+}
+
+.pie-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  pointer-events: none;
+}
+
+/* Optionnel : ajuster la taille du label sur mobile */
+@media (max-width: 768px) {
+  .pie-label {
+    font-size: 0.85rem;
+  }
+}

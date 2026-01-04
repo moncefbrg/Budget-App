@@ -1,0 +1,72 @@
+<div class="card shadow border-light rounded-3" *ngIf="type === 'Bénéfice'; else depenseTemplate">
+  <div class="card-header bg-dark text-white text-center py-3">
+    <h4 class="mb-0 fw-light ">
+      Suivi de l'objectif de bénéfice
+    </h4>
+  </div>
+  
+  <div class="card-body p-4 d-flex justify-content-around align-items-center flex-wrap">
+    <!-- Affichage des valeurs du bénéfice -->
+    <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+      <small class="text-muted text-uppercase fw-semibold mb-1">Objectif total</small>
+      <strong class="text-primary fs-4 fw-bold">{{ objectif }} €</strong>
+    </span>
+    <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+      <small class="text-muted text-uppercase fw-semibold mb-1">Montant gagné</small>
+      <strong class="text-success fs-4 fw-bold">{{ gagne }} €</strong>
+    </span>
+    <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+      <small class="text-muted text-uppercase fw-semibold mb-1">Montant restant</small>
+      <strong class="text-warning fs-4 fw-bold">{{ reste }} €</strong>
+    </span>
+    <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+      <small class="text-muted text-uppercase fw-semibold mb-1">Jours restants</small>
+      <strong class="text-info fs-4 fw-bold">{{ joursRestants }}</strong>
+    </span>
+    <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+      <small class="text-muted text-uppercase fw-semibold mb-1">À gagner / jour</small>
+      <strong class="text-dark fs-4 fw-bold">{{ parJour }} €</strong>
+    </span>
+    <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+      <small class="text-muted text-uppercase fw-semibold mb-1">À gagner / mois</small>
+      <strong class="text-dark fs-4 fw-bold">{{ parMois }} €</strong>
+    </span>
+  </div>
+</div>
+
+<ng-template #depenseTemplate>
+  <div class="card shadow border-light rounded-3">
+    <div class="card-header bg-dark text-white text-center py-3">
+      <h4 class="mb-0 fw-light ">
+        Suivi de l'objectif de dépense
+      </h4>
+    </div>
+    <div class="card-body p-4 d-flex justify-content-around align-items-center flex-wrap">
+      <!-- Affichage des valeurs du dépense -->
+      <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+        <small class="text-muted text-uppercase fw-semibold mb-1">Objectif total</small>
+        <strong class="text-primary fs-4 fw-bold">{{ objectif }} €</strong>
+      </span>
+      <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+        <small class="text-muted text-uppercase fw-semibold mb-1">Montant dépensé</small>
+        <strong class="text-danger fs-4 fw-bold">{{ gagne }} €</strong>
+      </span>
+      <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+        <small class="text-muted text-uppercase fw-semibold mb-1">Montant restant</small>
+        <strong class="text-warning fs-4 fw-bold">{{ reste }} €</strong>
+      </span>
+      <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+        <small class="text-muted text-uppercase fw-semibold mb-1">Jours restants</small>
+        <strong class="text-info fs-4 fw-bold">{{ joursRestants }}</strong>
+      </span>
+      <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+        <small class="text-muted text-uppercase fw-semibold mb-1">À dépenser / jour</small>
+        <strong class="text-dark fs-4 fw-bold">{{ parJour }} €</strong>
+      </span>
+      <span class="d-flex flex-column align-items-center mx-3 text-center mb-3">
+        <small class="text-muted text-uppercase fw-semibold mb-1">À dépenser / mois</small>
+        <strong class="text-dark fs-4 fw-bold">{{ parMois }} €</strong>
+      </span>
+    </div>
+  </div>
+</ng-template>

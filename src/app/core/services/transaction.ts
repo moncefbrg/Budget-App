@@ -16,14 +16,14 @@ export class Transaction {
   private beneficesSubject = new BehaviorSubject<Operation[]>([
     { id: 1, montant: 101500, date: new Date(), type: 'plus' },
     { id: 2, montant: 201500, date: new Date(), type: 'plus' },
-    { id: 3, montant: 301500, date: new Date(), type: 'plus' },
+    { id: 3, montant: 1500, date: new Date('2026-05-21'), type: 'plus' },
   ]);
 
   // BehaviorSubject pour les dépenses
   private depensesSubject = new BehaviorSubject<Operation[]>([
-    { id: 1, montant: 1000, date: new Date(), type: 'moins' },
-    { id: 2, montant: 2000, date: new Date(), type: 'moins' },
-    { id: 3, montant: 3000, date: new Date(), type: 'moins' },
+    { id: 1, montant: 500, date: new Date(), type: 'moins' },
+    { id: 2, montant: 500, date: new Date(), type: 'moins' },
+    { id: 3, montant: 20, date: new Date('2026-05-21'), type: 'moins' },
   ]);
 
   // Observable réactif pour les bénéfices et les dépenses

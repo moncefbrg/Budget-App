@@ -51,18 +51,18 @@
           </div>
         </form>
         <div class="text-center">
-            <p *ngIf="tempUser.desactive" class="text-muted">Votre compte est désactivé</p>
-            <p *ngIf="!tempUser.desactive"class="text-muted">Votre compte est activé</p>
+            <p *ngIf="tempUser.desactive && user !==null" class="text-muted">Votre compte est désactivé</p>
+            <p *ngIf="!tempUser.desactive && user !==null"class="text-muted">Votre compte est activé</p>
         </div>
 
 
         <!-- Boutons -->
         <div class="d-flex justify-content-center gap-3 pt-3 border-top">
-            <button *ngIf="!modifyBoolean" class="btn btn-primary px-4" (click)="toggleModify()">Modifier</button>
-            <button *ngIf="!modifyBoolean && !tempUser.desactive" class="btn btn-outline-danger px-4" (click)="toggleActivateUser(tempUser.id)">Désactiver</button>
-            <button *ngIf="!modifyBoolean && tempUser.desactive" class="btn btn-outline-warning px-4" (click)="toggleActivateUser(tempUser.id)">Activer</button>
-            <button *ngIf="modifyBoolean" class="btn btn-success px-4" (click)="modifyUser(tempUser)">Enregistrer</button>
-            <button *ngIf="modifyBoolean" class="btn btn-outline-dark px-4" (click)="cancel()">Annuler</button>
+            <button *ngIf="!modifyBoolean && user !== null" class="btn btn-primary px-4" (click)="toggleModify()">Modifier</button>
+            <button *ngIf="!modifyBoolean && !tempUser.desactive && user !== null" class="btn btn-outline-danger px-4" (click)="toggleActivateUser(tempUser.id)">Désactiver</button>
+            <button *ngIf="!modifyBoolean && tempUser.desactive && user !== null" class="btn btn-outline-warning px-4" (click)="toggleActivateUser(tempUser.id)">Activer</button>
+            <button *ngIf="modifyBoolean && user !== null" class="btn btn-success px-4" (click)="modifyUser(tempUser)">Enregistrer</button>
+            <button *ngIf="modifyBoolean && user !== null" class="btn btn-outline-dark px-4" (click)="cancel()">Annuler</button>
         </div>
 
       </div>

@@ -75,7 +75,7 @@ Objectif principal de l'année
         </form>
 
         <!-- PROGRESSION (statique) -->
-        <div class="mb-4">
+        <div class="mb-4" *ngIf="objectif !== null">
           <label class="fw-semibold mb-2 d-block">Progression annuelle</label>
           <div class="progress" style="height: 20px;">
             <div class="progress-bar bg-success" style="width: 65%;">
@@ -86,13 +86,13 @@ Objectif principal de l'année
 
         <!-- ACTIONS -->
         <div class="d-flex justify-content-center gap-3 pt-3 border-top">
-          <button class="btn btn-primary px-4" *ngIf="!modifyBoolean" (click)="toggleModify()">
+          <button class="btn btn-primary px-4" *ngIf="!modifyBoolean  && objectif !== null" (click)="toggleModify()">
             Modifier
           </button>
-          <button class="btn btn-success px-4 " *ngIf="modifyBoolean" (click)="modifyObjectif(tempObj)">
+          <button class="btn btn-success px-4 " *ngIf="modifyBoolean && objectif !== null" (click)="modifyObjectif()">
             Enregistrer
           </button>
-          <button class="btn btn-outline-secondary px-4 " *ngIf="modifyBoolean" (click)="cancel()">
+          <button class="btn btn-outline-secondary px-4 " *ngIf="modifyBoolean && objectif !== null" (click)="cancel()">
             Annuler
           </button>
         </div>

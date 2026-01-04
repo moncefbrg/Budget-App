@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, Observable } from 'rxjs';
 import { Auth, User } from './auth';
 export interface IObjectif{
   id:number| null,
@@ -48,17 +48,15 @@ export class Objectif {
     }
 
   ]);
-  user : User | null = null;
-  object$ = this.objectsSubject$.asObservable().pipe(
-    map(objects =>
-      objects.find(o => o.userId === this.user?.id)??null
-    )
-  );
 
-
+  object$:Observable<IObjectif | null>;
+  
   constructor(private authService:Auth){
-    this.authService.getLoggedUser().subscribe(
-      user => this.user = user
+
+    this.object$ = combineLatest([this.objectsSubject$,this.authService.getLoggedUser()]).pipe(
+      map(([objects, user]) =>
+        objects.find(o => o.userId === user?.id) ?? null
+      )
     );
   }
 

@@ -6,6 +6,7 @@ export const routes: Routes = [
     {path: 'depenses', loadChildren: () => import('./features/depenses/depenses-module').then(m => m.DepensesModule) },
     {path: 'benefices',loadChildren :() => import('./features/benefice/benefice-module').then(m => m.BeneficeModule)},
     {path: 'settings',loadChildren : ()=> import('./features/settings/settings-module').then(m => m.SettingsModule)},
+    {path: 'dashboard',loadChildren : ()=> import('./features/dashborad/dashborad-module').then(m => m.DashboradModule)},
     {path: '', redirectTo: '/home', pathMatch: 'full' },
     {path: '**',component:NotFound}
 ];
