@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="show" >
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">💸Manager</a>
     <button class="navbar-toggler" type="button" (click)="toggleMenu()">
@@ -29,7 +29,7 @@
             Bonjour {{ user.prenom }}
           </span>
         </li>
-        <li class="nav-item" *ngIf="!user">
+        <li class="nav-item" *ngIf="!user && show">
           <button class="btn btn-success" (click)="onLogin()">Login</button>
         </li>
         <li class="nav-item" *ngIf="user">

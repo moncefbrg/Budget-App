@@ -13,12 +13,15 @@ export interface User{
   providedIn: 'root',
 })
 export class Auth {
+  static count=0;
   private userSubject$ = new BehaviorSubject<User | null>(
     {id:1,prenom:'Ahmed',nom:'Ossman',email:'ahmedossman@gmail.com',dateCreation:new Date(),desactive:false}
   );
 
   constructor(){
-    this.logOut();
+   // this.logOut();
+     Auth.count += 1;
+     console.log('Auth service constructor',Auth.count);
   }
   user$ = this.userSubject$.asObservable();
 

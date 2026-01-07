@@ -1,0 +1,182 @@
+/* Style général de la section avec fond radial */
+.background-radial-gradient {
+  background-color: hsl(218, 41%, 15%);
+  background-image: radial-gradient(650px circle at 0% 0%,
+      hsl(218, 41%, 35%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%),
+    radial-gradient(1250px circle at 100% 100%,
+      hsl(218, 41%, 45%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%);
+  
+}
+
+/* Configuration pour que le contenu prenne tout l'espace */
+.content-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* Styles des formes circulaires */
+#radius-shape-1 {
+  height: 220px;
+  width: 220px;
+  top: -60px;
+  left: -130px;
+  background: radial-gradient(#44006b, #ad1fff);
+  overflow: hidden;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+#radius-shape-2 {
+  border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+  bottom: -60px;
+  right: -110px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(#44006b, #ad1fff);
+  overflow: hidden;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Effet de verre */
+.bg-glass {
+  background-color: hsla(0, 0%, 100%, 0.95) !important;
+  backdrop-filter: saturate(200%) blur(25px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* Conteneur du contenu */
+.content-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Styles du formulaire */
+.card-body {
+  padding: 2rem !important;
+}
+
+/* Styles des labels */
+.form-label {
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Styles des champs de formulaire */
+.form-control {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Styles des groupes de formulaire */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Bouton principal */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* Boutons sociaux */
+.btn-floating {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  color: #495057;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 1px solid #dee2e6;
+}
+
+.btn-floating:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+  color: #495057;
+  text-decoration: none;
+}
+
+/* Ombre pour les formes */
+.shadow-5-strong {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Masque les formes sur mobile */
+@media (max-width: 992px) {
+  #radius-shape-1,
+  #radius-shape-2 {
+    display: none;
+  }
+  
+  .content-wrapper {
+    padding: 1rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem !important;
+  }
+  
+  h1.display-5 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Améliorations pour les très petits écrans */
+@media (max-width: 576px) {
+  .bg-glass {
+    margin: 0 10px;
+  }
+  
+  .card-body {
+    padding: 1.25rem !important;
+  }
+  
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  
+  .col-md-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
