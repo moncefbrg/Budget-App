@@ -8,7 +8,7 @@ import { Auth } from './services/auth';
     CommonModule
   ],
   providers: [
-    Auth
+    
   ]
 })
 export class CoreModule { }

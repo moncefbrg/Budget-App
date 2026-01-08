@@ -19,8 +19,9 @@ export class App implements OnInit{
   constructor(private authService:Auth,private router:Router){}
   ngOnInit(): void {
     this.authService.getLoggedUser().subscribe(
-      (u)=> {this.user=u;
-        console.log(this.user)
+      (u)=> {
+        this.user=u;
+        console.log(this.user,'depuis app.ts')
       }
     );
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
@@ -29,9 +30,7 @@ export class App implements OnInit{
       }
     )
   }
-  login(){
-    this.authService.logIn(undefined);
-  }
+ 
   logout(){
     this.authService.logOut();
   }

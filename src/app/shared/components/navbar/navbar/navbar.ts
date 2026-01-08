@@ -17,7 +17,7 @@ export class Navbar implements OnInit{
   @Output() logout = new EventEmitter();
   show: boolean = true;
 
-  constructor(private router:Router){}
+  constructor(private router:Router ,){}
 
   ngOnInit(): void {
     this.router.events
@@ -29,7 +29,6 @@ export class Navbar implements OnInit{
   }
   isCollapsed = true;
   onLogin(){
-    this.login.emit();
     this.router.navigate(['/auth/login']);
   }
   onLogout(){

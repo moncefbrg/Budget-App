@@ -1,62 +1,75 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, delay } from 'rxjs';
-export interface User{
-  id:number,
-  nom:string,
-  prenom:string,
-  email:string,
-  dateCreation:Date,
-  desactive?:boolean,
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+export interface User {
+  id: number;
+  nom: string;
+  prenom: string;
+  email: string;
+  password?: string;
+  dateCreation: Date;
+  desactive?: boolean;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
-  static count=0;
-  private userSubject$ = new BehaviorSubject<User | null>(
-    {id:1,prenom:'Ahmed',nom:'Ossman',email:'ahmedossman@gmail.com',dateCreation:new Date(),desactive:false}
-  );
+  private accounts: User[] = [
+    { id: 1, prenom: 'Ali', nom: 'Omar', password: 'password1', email: 'Ali@gmail.com', dateCreation: new Date(), desactive: false },
+    { id: 2, prenom: 'Ahmed', nom: 'Ossman', password: 'password2', email: 'ahmed@gmail.com', dateCreation: new Date(), desactive: false }
+  ];
 
-  constructor(){
-   // this.logOut();
-     Auth.count += 1;
-     console.log('Auth service constructor',Auth.count);
+  constructor(private router : Router){}
+
+  private userSubject$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(this.loadUserFromStorage());
+
+  user$: Observable<User | null> = this.userSubject$.asObservable();
+
+  // Charger l'utilisateur depuis le localStorage au démarrage
+  private loadUserFromStorage(): User | null {
+    const userStr = localStorage.getItem('user');
+    return userStr ? JSON.parse(userStr) : null;
   }
-  user$ = this.userSubject$.asObservable();
 
-  getLoggedUser(){
+  getLoggedUser(): Observable<User | null> {
     return this.user$;
   }
 
-  modifyUser(u:User){
-    if(this.userSubject$.value?.id === u.id){
-      const user={...this.userSubject$.value};
-      user.nom = u.nom;
-      user.prenom = u.prenom;
-      user.email = u.email;
-      this.userSubject$.next(user);
-    }
-    console.log(this.userSubject$.value);
-  }
-  toggleActivateUser(id:number){
-    if(this.userSubject$.value?.id === id){
-      const user={...this.userSubject$.value};
-      user.desactive = !user.desactive;
-      this.userSubject$.next(user);
-    }
+  getLoggedUserSync(): User | null {
+    return this.userSubject$.value;
   }
 
-  logIn(u:User | undefined){
-    if(u){
-      this.userSubject$.next(u);
-    }else{
-      this.userSubject$.next({id:1,prenom:'Ali',nom:'Omar',email:'ahmedossman@gmail.com',dateCreation:new Date(),desactive:false});
+  logIn(u: { email: string; password: string }): boolean {
+    const user = this.accounts.find(acc => acc.email === u.email && acc.password === u.password);
+    if (user) {
+      this.userSubject$.next(user);
+      localStorage.setItem('user', JSON.stringify(user)); // ← persistance
+      return true;
     }
+    return false;
   }
 
-  logOut(){
+  logOut() {
     this.userSubject$.next(null);
+    localStorage.removeItem('user'); // ← supprimer la persistance
+    this.router.navigate(['/home']);
   }
-  
+
+  modifyUser(u: User) {
+    if (this.userSubject$.value?.id === u.id) {
+      const user = { ...this.userSubject$.value, ...u };
+      this.userSubject$.next(user);
+      localStorage.setItem('user', JSON.stringify(user)); // mettre à jour persistance
+    }
+  }
+
+  toggleActivateUser(id: number) {
+    if (this.userSubject$.value?.id === id) {
+      const user = { ...this.userSubject$.value, desactive: !this.userSubject$.value.desactive };
+      this.userSubject$.next(user);
+      localStorage.setItem('user', JSON.stringify(user)); // mettre à jour persistance
+    }
+  }
 }
