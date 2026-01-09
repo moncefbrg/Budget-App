@@ -31,19 +31,27 @@ Budget Tracker est une application web de suivi de budget personnel. Elle permet
 ## Captures d'écran
 
 ### Page Login
-<img src="screenshots/login.jpg" width="500">
+<p align="center">
+  <img src="screenshots/login.jpg" width="500">
+</p>
 
 ### Page d'accueil
-<img src="screenshots/accueil.jpg" width="500">
+<p align="center">
+  <img src="screenshots/accueil.jpg" width="500">
+</p>
 
 ### Dashboard 
-<img src="screenshots/dashboard1.jpg" width="500">
-<img src="screenshots/dashborad2.jpg" width="500">
+<p align="center">
+  <img src="screenshots/dashboard1.jpg" width="500">
+  <img src="screenshots/dashborad2.jpg" width="500">
+</p>
 
 ### Ajout de transaction
-<img src="screenshots/depenses.jpg" width="500">
+<p align="center">
+  <img src="screenshots/depenses.jpg" width="500">
+</p>
 
-### Paramétres
-<img src="screenshots/settings.jpg" width="500">
-
-
+### Paramètres
+<p align="center">
+  <img src="screenshots/settings.jpg" width="500">
+</p>
