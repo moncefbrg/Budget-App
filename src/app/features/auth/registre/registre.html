@@ -7,7 +7,7 @@
         <!-- Texte -->
         <div class="col-lg-6 mb-5 mb-lg-0">
           <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            💸Manager <br />
+            💸BudgetManager <br />
             <span style="color: hsl(218, 81%, 75%)">Control your money</span>
           </h1>
           <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
@@ -23,68 +23,121 @@
 
           <div class="card bg-glass">
             <div class="card-body px-4 py-4 px-md-5">
-              <form class="d-flex flex-column align-items-center">
+              <form
+  class="d-flex flex-column align-items-center"
+  [formGroup]="registerForm"
+  (ngSubmit)="register()"
+  novalidate
+>
 
-                <div class="w-100 mb-3 mt-1" style="max-width: 450px;">
-                  <div class="text-center">
-                    <h1>Welcome</h1>
-                  </div>
-                </div>
+  <div class="w-100 text-center mb-4">
+    <h1>Welcome</h1>
+  </div>
 
-                <!-- Champ Nom Prénom côte à côte -->
-                <div class="form-group mb-3 w-100" style="max-width: 450px;">
-                  <div class="row">
-                    <!-- First Name -->
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label" for="firstName">First Name</label>
-                      <input type="text" id="firstName" class="form-control form-control-md" placeholder="Enter your first name" required />
-                    </div>
-                    <!-- Last Name -->
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label" for="lastName">Last Name</label>
-                      <input type="text" id="lastName" class="form-control form-control-md" placeholder="Enter your last name" required />
-                    </div>
-                  </div>
-                </div>
+  <!-- First & Last Name -->
+  <div class="row w-100 mb-3" style="max-width: 450px;">
+    <div class="col-md-6">
+      <label class="form-label">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="prenom"
+        placeholder="Enter your first name"
+      />
+      <small class="text-danger" *ngIf="prenom.touched && prenom.errors">
+        <span *ngIf="prenom.errors['required']">Prénom obligatoire</span><br />
+        <span *ngIf="prenom.errors['minlength'] || prenom.errors['maxlength']">
+          5 à 20 caractères
+        </span>
+      </small>
+    </div>
 
-                <!-- Champ Email -->
-                <div class="form-group mb-3 w-100" style="max-width: 450px;">
-                  <label class="form-label" for="email">Email address</label>
-                  <input type="email" id="email" class="form-control form-control-md" placeholder="Enter your email" required />
-                </div>
+    <div class="col-md-6">
+      <label class="form-label">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nom"
+        placeholder="Enter your last name"
+      />
+      <small class="text-danger" *ngIf="nom.touched && nom.errors">
+        <span *ngIf="nom.errors['required']">Nom obligatoire</span><br />
+        <span *ngIf="nom.errors['minlength'] || nom.errors['maxlength']">
+          5 à 20 caractères
+        </span>
+      </small>
+    </div>
+  </div>
 
-                <!-- Champ Password -->
-                <div class="form-group mb-3 w-100" style="max-width: 450px;">
-                  <label class="form-label" for="password">Password</label>
-                  <input type="password" id="password" class="form-control form-control-md" placeholder="Enter your password" required />
-                </div>
+  <!-- Email -->
+  <div class="w-100 mb-3" style="max-width: 450px;">
+    <label class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email"
+      placeholder="Enter your email"
+    />
+    <small class="text-danger" *ngIf="email.touched && email.errors">
+      <span *ngIf="email.errors['required']">Email obligatoire</span><br />
+      <span *ngIf="email.errors['email']">Email invalide</span>
+    </small>
+  </div>
 
-                <!-- Champ Confirm Password -->
-                <div class="form-group mb-3 w-100" style="max-width: 450px;">
-                  <label class="form-label" for="confirmPassword">Confirm Password</label>
-                  <input type="password" id="confirmPassword" class="form-control form-control-md" placeholder="Confirm your password" required />
-                </div>
+  <!-- Password -->
+  <div class="w-100 mb-3" style="max-width: 450px;">
+    <label class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      formControlName="password"
+      placeholder="Enter your password"
+    />
+    <small class="text-danger" *ngIf="password.touched && password.errors">
+      <span *ngIf="password.errors['required']">Mot de passe obligatoire</span><br />
+      <span *ngIf="password.errors['minlength']">
+        Minimum 8 caractères
+      </span>
+    </small>
+  </div>
 
-                <!-- Bouton Submit -->
-                <div class="w-100" style="max-width: 450px;">
-                  <button type="submit" class="btn btn-primary btn-block btn-lg w-100 mb-3">
-                    Sign Up
-                  </button>
-                </div>
+  <!-- Confirm Password -->
+  <div class="w-100 mb-3" style="max-width: 450px;">
+    <label class="form-label">Confirm Password</label>
+    <input
+      type="password"
+      class="form-control"
+      formControlName="confirmPassword"
+      placeholder="Confirm your password"
+    />
+    <small class="text-danger" *ngIf="confirmPassword.touched">
+      <span *ngIf="confirmPassword.errors?.['required']">
+        Confirmation obligatoire
+      </span><br />
+      <span *ngIf="registerForm.hasError('passwordMismatch')">
+        Les mots de passe ne correspondent pas
+      </span>
+    </small>
+  </div>
 
-                <!-- Lien login -->
-                <div class="text-center w-100">
-                  <p class="mb-0" style="font-size: 0.9rem;">
-                    Already have an account? <a routerLink="/auth/login">Sign In</a>
-                  </p>
-                </div>
+  <!-- Submit -->
+  <div class="w-100 mb-3" style="max-width: 450px;">
+    <button type="submit" class="btn btn-primary w-100 btn-lg">
+      Sign Up
+    </button>
+  </div>
 
-                <!-- Lien back home -->
-                <div class="text-center mt-3 w-100">
-                  <a routerLink="/home" style="font-size: 0.9rem;">Back to home</a>
-                </div>
+  <!-- Links -->
+  <div class="text-center">
+    <p class="mb-1">
+      Already have an account?
+      <a routerLink="/auth/login">Sign In</a>
+    </p>
+    <a routerLink="/home">Back to home</a>
+  </div>
 
-              </form>
+</form>
+
             </div>
           </div>
         </div>

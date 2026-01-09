@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="show" >
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">💸Manager</a>
+    <a class="navbar-brand" routerLink="/">BudgetManager</a>
     <button class="navbar-toggler" type="button" (click)="toggleMenu()">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,10 +30,10 @@
           </span>
         </li>
         <li class="nav-item" *ngIf="!user && show">
-          <button class="btn btn-success" (click)="onLogin()">Login</button>
+          <button class="btn btn-outline-success" (click)="onLogin()">Login</button>
         </li>
         <li class="nav-item" *ngIf="user">
-          <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+          <button class="btn btn-outline-danger" (click)="onLogout()">Logout</button>
         </li>
       </ul>
     </div>
